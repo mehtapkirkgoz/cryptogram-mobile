@@ -11,6 +11,7 @@ var session_key := ""
 var daily := false
 var message := ""
 var screen := "home"
+var tutorial := false
 
 func _ready() -> void:
 	var skin := Theme.new()
@@ -113,7 +114,7 @@ func home() -> void:
 	label_at(body, tr_text("tagline"), 20, MUTED)
 	var completed: Array = Progress.state().completed
 	var index := mini(completed.size(), Languages.puzzles().size() - 1)
-	button_at(body, "▶   " + tr_text("play"), func(): start(index), true).custom_minimum_size.y = 70
+	button_at(body, "▶   " + tr_text("play"), func(): begin_play(index), true).custom_minimum_size.y = 70
 	var shortcuts := row(body)
 	button_at(shortcuts, "▦\n" + tr_text("daily"), start_daily)
 	button_at(shortcuts, "◇\n" + tr_text("levels"), levels)
@@ -176,6 +177,12 @@ func start_daily() -> void:
 	var today := Time.get_date_string_from_system()
 	start(int(today.replace("-", "")) % Languages.puzzles().size(), true)
 
+func begin_play(index: int) -> void:
+	tutorial = not bool(Progress.data.get("tutorial_seen", false))
+	Progress.data.tutorial_seen = true
+	Progress.save()
+	start(index)
+
 func start(index: int, is_daily: bool = false) -> void:
 	daily = is_daily
 	puzzle_index = index
@@ -220,7 +227,14 @@ func show_game() -> void:
 	base()
 	header(tr_text("daily") if daily else "%s %d" % [tr_text("puzzle"), puzzle_index + 1])
 	var info := panel(body)
-	label_at(info, "%s  ·  %s  ·  %d%%" % [difficulty(puzzle_index), Languages.info().name, roundi(game.ratio() * 100)], 17)
+	label_at(info, "%s  ·  %d%%" % [Languages.info().name, roundi(game.ratio() * 100)], 17)
+	if tutorial and not game.solved():
+		var guide := label_at(body, tr_text("instruction"), 17, BLUE)
+		guide.modulate = Color(1, 1, 1, 0.35)
+		guide.pivot_offset = guide.size / 2.0
+		var pulse := create_tween().set_loops()
+		pulse.tween_property(guide, "modulate:a", 1.0, 0.55)
+		pulse.tween_property(guide, "modulate:a", 0.35, 0.55)
 	var progress_bar := ProgressBar.new()
 	progress_bar.value = game.ratio() * 100
 	progress_bar.show_percentage = false

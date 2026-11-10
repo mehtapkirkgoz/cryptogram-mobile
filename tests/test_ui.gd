@@ -9,6 +9,7 @@ func run() -> void:
 	root.add_child(app)
 	var original_language: String = Languages.current
 	for code in Languages.CODES:
+		assert(Languages.puzzles().size() == 100)
 		Languages.current = code
 		app.home()
 		await get_tree().process_frame
@@ -41,5 +42,5 @@ func run() -> void:
 		app.settings()
 		await get_tree().process_frame
 	Languages.current = original_language
-	print("PASS: home, 30 puzzle screens, levels, statistics and settings in five languages")
+	print("PASS: home, 500 puzzle screens, levels, statistics and settings in five languages")
 	get_tree().quit()
