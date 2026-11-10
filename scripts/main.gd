@@ -292,6 +292,16 @@ func show_game() -> void:
 	if game.mistake_limit > 0:
 		mistake_text = "%s: %d / %d" % [tr_text("mistakes"), game.mistakes_left(), game.mistake_limit]
 	label_at(body, mistake_text, 15, MUTED)
+	if game.game_over():
+		label_at(body, "%s: 0 / %d" % [tr_text("mistakes"), game.mistake_limit], 18, Color("b34c5a"))
+		button_at(body, tr_text("continue"), retry_puzzle, true)
+		button_at(body, tr_text("home"), home)
+		return
+
+func retry_puzzle() -> void:
+	Progress.state().sessions.erase(session_key)
+	Progress.save()
+	start(puzzle_index, daily)
 
 func enter(letter: String) -> void:
 	var previous := game.mistakes

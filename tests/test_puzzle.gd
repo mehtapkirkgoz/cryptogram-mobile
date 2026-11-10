@@ -29,6 +29,16 @@ func _initialize() -> void:
 		restored.selected = index
 		restored.enter(restored.occurrences[index].letter)
 	assert(restored.solved())
+	var limited := CipherPuzzle.new()
+	limited.setup("AB", "AB", {}, 0, 3)
+	limited.selected = 0
+	limited.enter("B")
+	limited.selected = 0
+	limited.enter("B")
+	limited.selected = 0
+	limited.enter("B")
+	assert(limited.game_over())
+	assert(limited.mistakes_left() == 0)
 	for code in ["tr", "en", "de", "fr", "es"]:
 		var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/%s.json" % code))
 		for entry in data.puzzles:
