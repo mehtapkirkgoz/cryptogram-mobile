@@ -183,9 +183,9 @@ func start(index: int, is_daily: bool = false) -> void:
 	session_key = "daily_" + Time.get_date_string_from_system() if daily else puzzle.id
 	game = CipherPuzzle.new()
 	var saved: Dictionary = Progress.state().sessions.get(session_key, {})
-	if not saved.has("schema") or int(saved.schema) != 2:
+	if not saved.has("schema") or int(saved.schema) != 3:
 		saved = {}
-	game.setup(puzzle.text, Languages.info().alphabet, saved, starter_hints(index))
+	game.setup(puzzle.text, Languages.info().alphabet, saved, starter_hints(index), mistake_limit(index))
 	message = tr_text("instruction")
 	show_game()
 
@@ -196,6 +196,9 @@ func starter_hints(index: int) -> int:
 
 func difficulty(index: int) -> String:
 	return [tr_text("easy"), "Orta", "Zor"][mini(index, 2)]
+
+func mistake_limit(index: int) -> int:
+	return 3 if daily or index > 0 else -1
 
 func persist() -> void:
 	Progress.state().sessions[session_key] = game.serialize()
@@ -247,12 +250,19 @@ func show_game() -> void:
 			var cell := Button.new()
 			var visible_guess := game.guess_for(cell_index)
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
+			cell.tooltip_text = "Sayı: %d" % code
 			cell.custom_minimum_size = Vector2(29, 64)
 			cell.add_theme_font_size_override("font_size", 18)
 			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
 			style.set_content_margin_all(2)
 			style.set_corner_radius_all(7)
 			cell.add_theme_stylebox_override("normal", style)
+			cell.add_theme_stylebox_override("hover", style)
+			cell.add_theme_stylebox_override("pressed", style)
+			cell.add_theme_stylebox_override("focus", style)
+			cell.add_theme_color_override("font_color", INK)
+			cell.add_theme_color_override("font_hover_color", INK)
+			cell.add_theme_color_override("font_pressed_color", INK)
 			cell.pressed.connect(func(): game.selected = cell_index; show_game())
 			letters.add_child(cell)
 			occurrence_index += 1
@@ -279,7 +289,10 @@ func show_game() -> void:
 				style.set_content_margin_all(1)
 				style.set_corner_radius_all(7)
 				key.add_theme_stylebox_override(state, style)
-	label_at(body, "%s: %d" % [tr_text("mistakes"), game.mistakes], 15, MUTED)
+	var mistake_text := "%s: %d" % [tr_text("mistakes"), game.mistakes]
+	if game.mistake_limit > 0:
+		mistake_text = "%s: %d / %d" % [tr_text("mistakes"), game.mistakes_left(), game.mistake_limit]
+	label_at(body, mistake_text, 15, MUTED)
 
 func enter(letter: String) -> void:
 	var previous := game.mistakes

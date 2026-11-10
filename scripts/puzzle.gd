@@ -9,9 +9,10 @@ var guesses: Dictionary = {}
 var selected := 0
 var hints := 3
 var mistakes := 0
+var mistake_limit := -1
 var locked: Array = []
 
-func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints: int = 0) -> void:
+func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints: int = 0, limit: int = -1) -> void:
 	sentence = text
 	for letter in sentence:
 		if alphabet.contains(letter) and not numbers.has(letter):
@@ -25,6 +26,7 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 		guesses[int(key)] = saved.guesses[key]
 	hints = int(saved.get("hints", 3))
 	mistakes = int(saved.get("mistakes", 0))
+	mistake_limit = int(saved.get("mistake_limit", limit))
 	for key in saved.get("locked", []):
 		locked.append(int(key))
 	if saved.is_empty() and starter_hints > 0:
@@ -42,7 +44,7 @@ func guess_for(index: int) -> String:
 	return str(guesses.get(index, ""))
 
 func enter(letter: String) -> String:
-	if locked.has(selected) or solved():
+	if locked.has(selected) or solved() or game_over():
 		return ""
 	var code: int = occurrences[selected].code
 	if answers.get(code) != letter:
@@ -51,6 +53,12 @@ func enter(letter: String) -> String:
 	guesses[selected] = letter
 	select_next()
 	return ""
+
+func game_over() -> bool:
+	return mistake_limit > 0 and mistakes >= mistake_limit
+
+func mistakes_left() -> int:
+	return -1 if mistake_limit < 0 else maxi(mistake_limit - mistakes, 0)
 
 func select_next() -> void:
 	for index in range(occurrences.size()):
@@ -88,4 +96,4 @@ func occurrence_count() -> int:
 	return occurrences.size()
 
 func serialize() -> Dictionary:
-	return {"schema": 2, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes}
+	return {"schema": 3, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes, "mistake_limit": mistake_limit}
