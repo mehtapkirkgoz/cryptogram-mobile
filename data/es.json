@@ -1,0 +1,59 @@
+{
+  "name": "Espa?ol",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ???????",
+  "keyboard": [
+    "QWERTYUIOP",
+    "ASDFGHJKL?",
+    "ZXCVBNM",
+    "??????"
+  ],
+  "ui": {
+    "tagline": "Descifra nuevas ideas",
+    "play": "Jugar",
+    "daily": "Reto diario",
+    "levels": "Niveles",
+    "stats": "Estad?sticas",
+    "language": "Idioma",
+    "settings": "Ajustes",
+    "home": "Inicio",
+    "puzzle": "Enigma",
+    "progress": "Progreso",
+    "reveal": "Revelar",
+    "hint": "Pista",
+    "clear": "Borrar",
+    "instruction": "Elige un n?mero y luego una letra.",
+    "won": "?Muy bien! Enigma resuelto.",
+    "next": "Siguiente enigma",
+    "completed": "Completados",
+    "mistakes": "Errores",
+    "sound": "Sonido",
+    "on": "S?",
+    "off": "No",
+    "easy": "F?cil",
+    "topic": "Tema",
+    "duplicate": "Esta letra pertenece a otro n?mero.",
+    "wrong": "Int?ntalo de nuevo.",
+    "no_hints": "No quedan pistas.",
+    "cleared": "Selecci?n borrada.",
+    "locked": "Bloqueado",
+    "daily_won": "?Reto diario completado!",
+    "continue": "Continuar"
+  },
+  "puzzles": [
+    {
+      "id": "es_1",
+      "text": "CADA PASO ABRE UN CAMINO NUEVO.",
+      "topic": "Progreso"
+    },
+    {
+      "id": "es_2",
+      "text": "LA CURIOSIDAD LLENA EL D?A DE COLOR.",
+      "topic": "Curiosidad"
+    },
+    {
+      "id": "es_3",
+      "text": "UNA IDEA CRECE CUANDO SE COMPARTE.",
+      "topic": "Compartir"
+    }
+  ]
+}

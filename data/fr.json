@@ -1,0 +1,59 @@
+{
+  "name": "Fran?ais",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ????????????????",
+  "keyboard": [
+    "AZERTYUIOP",
+    "QSDFGHJKLM",
+    "WXCVBN",
+    "????????????????"
+  ],
+  "ui": {
+    "tagline": "D?chiffrez vos inspirations",
+    "play": "Jouer",
+    "daily": "D?fi du jour",
+    "levels": "Niveaux",
+    "stats": "Statistiques",
+    "language": "Langue",
+    "settings": "Param?tres",
+    "home": "Accueil",
+    "puzzle": "?nigme",
+    "progress": "Progression",
+    "reveal": "R?v?ler",
+    "hint": "Indice",
+    "clear": "Effacer",
+    "instruction": "Choisissez un nombre puis une lettre.",
+    "won": "Bravo ! ?nigme r?solue.",
+    "next": "?nigme suivante",
+    "completed": "Termin?es",
+    "mistakes": "Erreurs",
+    "sound": "Son",
+    "on": "Oui",
+    "off": "Non",
+    "easy": "Facile",
+    "topic": "Th?me",
+    "duplicate": "Cette lettre appartient ? un autre nombre.",
+    "wrong": "Essayez encore.",
+    "no_hints": "Aucun indice disponible.",
+    "cleared": "S?lection effac?e.",
+    "locked": "Verrouill?",
+    "daily_won": "D?fi du jour termin? !",
+    "continue": "Continuer"
+  },
+  "puzzles": [
+    {
+      "id": "fr_1",
+      "text": "CHAQUE PAS DESSINE UN NOUVEAU CHEMIN.",
+      "topic": "Progr?s"
+    },
+    {
+      "id": "fr_2",
+      "text": "LA CURIOSIT? ?CLAIRE NOS JOURN?ES.",
+      "topic": "Curiosit?"
+    },
+    {
+      "id": "fr_3",
+      "text": "UNE ID?E GRANDIT QUAND ON LA PARTAGE.",
+      "topic": "Partage"
+    }
+  ]
+}

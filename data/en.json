@@ -1,0 +1,58 @@
+{
+  "name": "English",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "keyboard": [
+    "QWERTYUIOP",
+    "ASDFGHJKL",
+    "ZXCVBNM"
+  ],
+  "ui": {
+    "tagline": "Decode a little inspiration",
+    "play": "Play",
+    "daily": "Daily Puzzle",
+    "levels": "Levels",
+    "stats": "Statistics",
+    "language": "Language",
+    "settings": "Settings",
+    "home": "Home",
+    "puzzle": "Puzzle",
+    "progress": "Progress",
+    "reveal": "Reveal",
+    "hint": "Hint",
+    "clear": "Clear",
+    "instruction": "Select a number, then tap a letter.",
+    "won": "Wonderful! Puzzle solved.",
+    "next": "Next puzzle",
+    "completed": "Completed",
+    "mistakes": "Mistakes",
+    "sound": "Sound",
+    "on": "On",
+    "off": "Off",
+    "easy": "Easy",
+    "topic": "Topic",
+    "duplicate": "That letter belongs to another number.",
+    "wrong": "Try again.",
+    "no_hints": "No hints remaining.",
+    "cleared": "Selected number cleared.",
+    "locked": "Locked",
+    "daily_won": "Daily puzzle complete!",
+    "continue": "Continue"
+  },
+  "puzzles": [
+    {
+      "id": "en_1",
+      "text": "SMALL STEPS BUILD BRIGHT TOMORROWS.",
+      "topic": "Growth"
+    },
+    {
+      "id": "en_2",
+      "text": "CURIOSITY OPENS QUIET DOORS.",
+      "topic": "Curiosity"
+    },
+    {
+      "id": "en_3",
+      "text": "MAKE ROOM FOR ONE NEW IDEA.",
+      "topic": "Creativity"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "T?rk?e",
+  "alphabet": "ABC?DEFG?HI?JKLMNO?PRS?TU?VYZ",
+  "keyboard": [
+    "QWERTYUIOP??",
+    "ASDFGHJKL??",
+    "ZXCVBNM??"
+  ],
+  "ui": {
+    "tagline": "?ifreli c?mleleri ??z",
+    "play": "Oyuna Ba?la",
+    "daily": "G?nl?k Bulmaca",
+    "levels": "Seviyeler",
+    "stats": "?statistikler",
+    "language": "Dil Se?imi",
+    "settings": "Ayarlar",
+    "home": "Ana Sayfa",
+    "puzzle": "Bulmaca",
+    "progress": "?lerleme",
+    "reveal": "Harf A?",
+    "hint": "?pucu",
+    "clear": "Temizle",
+    "instruction": "Bir say? se?, ard?ndan bir harfe dokun.",
+    "won": "Harika! Bulmacay? ??zd?n.",
+    "next": "Sonraki bulmaca",
+    "completed": "Tamamlanan",
+    "mistakes": "Hatalar",
+    "sound": "Ses",
+    "on": "A??k",
+    "off": "Kapal?",
+    "easy": "Kolay",
+    "topic": "Konu",
+    "duplicate": "Bu harf ba?ka bir say?ya ait.",
+    "wrong": "Tekrar dene.",
+    "no_hints": "?pu?lar?n bitti.",
+    "cleared": "Se?ili say? silindi.",
+    "locked": "Hen?z a??lmad?",
+    "daily_won": "G?nl?k bulmaca tamamland?!",
+    "continue": "Devam Et"
+  },
+  "puzzles": [
+    {
+      "id": "tr_1",
+      "text": "K???K ADIMLAR B?Y?K YOLLAR A?AR.",
+      "topic": "Geli?im"
+    },
+    {
+      "id": "tr_2",
+      "text": "B?R F?K?R YEN? B?R KAPI A?AR.",
+      "topic": "Merak"
+    },
+    {
+      "id": "tr_3",
+      "text": "BUG?N KEND? H?KAYEN? YAZ.",
+      "topic": "Yeni ba?lang??"
+    }
+  ]
+}

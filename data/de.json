@@ -1,0 +1,58 @@
+{
+  "name": "Deutsch",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ????",
+  "keyboard": [
+    "QWERTZUIOP?",
+    "ASDFGHJKL??",
+    "YXCVBNM?"
+  ],
+  "ui": {
+    "tagline": "Entschl?ssle neue Gedanken",
+    "play": "Spielen",
+    "daily": "Tagesr?tsel",
+    "levels": "Level",
+    "stats": "Statistik",
+    "language": "Sprache",
+    "settings": "Einstellungen",
+    "home": "Start",
+    "puzzle": "R?tsel",
+    "progress": "Fortschritt",
+    "reveal": "Aufdecken",
+    "hint": "Hinweis",
+    "clear": "L?schen",
+    "instruction": "W?hle eine Zahl und dann einen Buchstaben.",
+    "won": "Geschafft! R?tsel gel?st.",
+    "next": "N?chstes R?tsel",
+    "completed": "Gel?st",
+    "mistakes": "Fehler",
+    "sound": "Ton",
+    "on": "An",
+    "off": "Aus",
+    "easy": "Leicht",
+    "topic": "Thema",
+    "duplicate": "Dieser Buchstabe geh?rt zu einer anderen Zahl.",
+    "wrong": "Versuche es erneut.",
+    "no_hints": "Keine Hinweise ?brig.",
+    "cleared": "Auswahl gel?scht.",
+    "locked": "Gesperrt",
+    "daily_won": "Tagesr?tsel gel?st!",
+    "continue": "Weiter"
+  },
+  "puzzles": [
+    {
+      "id": "de_1",
+      "text": "KLEINE SCHRITTE BRINGEN DICH WEITER.",
+      "topic": "Entwicklung"
+    },
+    {
+      "id": "de_2",
+      "text": "NEUGIER MACHT DEN ALLTAG BUNT.",
+      "topic": "Neugier"
+    },
+    {
+      "id": "de_3",
+      "text": "JEDER MORGEN SCHENKT NEUE WEGE.",
+      "topic": "Neuanfang"
+    }
+  ]
+}
