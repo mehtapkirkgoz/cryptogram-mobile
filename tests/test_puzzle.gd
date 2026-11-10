@@ -48,5 +48,5 @@ func _initialize() -> void:
 				check.selected = index
 				check.enter(check.occurrences[index].letter)
 			assert(check.solved())
-	print("PASS: independent repeated-number cells, reveal, persistence and 15 puzzle solutions")
+	print("PASS: independent repeated-number cells, reveal, persistence and 30 puzzle solutions")
 	quit()

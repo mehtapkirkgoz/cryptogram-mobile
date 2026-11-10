@@ -53,6 +53,21 @@
       "id": "en_3",
       "text": "MAKE ROOM FOR ONE NEW IDEA.",
       "topic": "Creativity"
+    },
+    {
+      "id": "en_4",
+      "text": "PATIENCE MAKES THE LONG ROAD SHORTER.",
+      "topic": "Patience"
+    },
+    {
+      "id": "en_5",
+      "text": "FEED YOUR THOUGHTS WITH CURIOSITY.",
+      "topic": "Learning"
+    },
+    {
+      "id": "en_6",
+      "text": "GOOD QUESTIONS INVITE NEW ANSWERS.",
+      "topic": "Discovery"
     }
   ]
 }

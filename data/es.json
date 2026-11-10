@@ -54,6 +54,21 @@
       "id": "es_3",
       "text": "UNA IDEA CRECE CUANDO SE COMPARTE.",
       "topic": "Compartir"
+    },
+    {
+      "id": "es_4",
+      "text": "LA PACIENCIA ACORTA LOS CAMINOS LARGOS.",
+      "topic": "Paciencia"
+    },
+    {
+      "id": "es_5",
+      "text": "LA CURIOSIDAD ALIMENTA LAS IDEAS.",
+      "topic": "Aprendizaje"
+    },
+    {
+      "id": "es_6",
+      "text": "LAS BUENAS PREGUNTAS ABREN PUERTAS.",
+      "topic": "Descubrimiento"
     }
   ]
 }

@@ -53,6 +53,21 @@
       "id": "de_3",
       "text": "JEDER MORGEN SCHENKT NEUE WEGE.",
       "topic": "Neuanfang"
+    },
+    {
+      "id": "de_4",
+      "text": "GEDULD MACHT DEN LANGEN WEG KÜRZER.",
+      "topic": "Geduld"
+    },
+    {
+      "id": "de_5",
+      "text": "NEUGIER NÄHRT GUTE GEDANKEN.",
+      "topic": "Lernen"
+    },
+    {
+      "id": "de_6",
+      "text": "GUTE FRAGEN ÖFFNEN NEUE TÜREN.",
+      "topic": "Entdeckung"
     }
   ]
 }

@@ -41,5 +41,5 @@ func run() -> void:
 		app.settings()
 		await get_tree().process_frame
 	Languages.current = original_language
-	print("PASS: home, 15 puzzle screens, levels, statistics and settings in five languages")
+	print("PASS: home, 30 puzzle screens, levels, statistics and settings in five languages")
 	get_tree().quit()

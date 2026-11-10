@@ -53,6 +53,21 @@
       "id": "tr_3",
       "text": "BUGÜN KENDİ HİKAYENİ YAZ.",
       "topic": "Yeni başlangıç"
+    },
+    {
+      "id": "tr_4",
+      "text": "SABIR EN UZUN YOLU KISALTIR.",
+      "topic": "Sabır"
+    },
+    {
+      "id": "tr_5",
+      "text": "DÜŞÜNCELERİNİ MERAKLA BESLE.",
+      "topic": "Öğrenme"
+    },
+    {
+      "id": "tr_6",
+      "text": "GÜZEL SORULAR YENİ CEVAPLAR GETİRİR.",
+      "topic": "Keşif"
     }
   ]
 }

@@ -54,6 +54,21 @@
       "id": "fr_3",
       "text": "UNE IDÉE GRANDIT QUAND ON LA PARTAGE.",
       "topic": "Partage"
+    },
+    {
+      "id": "fr_4",
+      "text": "LA PATIENCE RACCOURCIT LES LONGS CHEMINS.",
+      "topic": "Patience"
+    },
+    {
+      "id": "fr_5",
+      "text": "LA CURIOSITÉ NOURRIT LES BONNES IDÉES.",
+      "topic": "Apprentissage"
+    },
+    {
+      "id": "fr_6",
+      "text": "LES BONNES QUESTIONS OUVRENT DES PORTES.",
+      "topic": "Découverte"
     }
   ]
 }
