@@ -36,7 +36,7 @@ Her giriş, silme ve harf açma işleminde ilerleme `user://progress.json` dosya
 | `data/{tr,en,de,fr,es}.json` | Dilin arayüzü, klavyesi ve özgün bulmacaları |
 | `tests/test_puzzle.gd` | Motor ve içerik kontrolleri |
 
-Her dilde altı ayrı örnek cümle bulunur. Havuzlar aynı cümlelerin birebir çevirilerinden oluşmaz. Fransızca ve İspanyolcada aksanlı harfler klavyede ayrı tuşlardır; Türkçede I/İ ayrımı korunur. Yeni bulmacayı ilgili JSON dosyasının `puzzles` listesine benzersiz `id`, büyük harfli `text` ve `topic` ile ekleyin. Mevcut kayıtların korunması için yayınlanmış bulmacaların kimliklerini ve metinlerini değiştirmeyin.
+Her dilde 100 ayrı bulmaca bulunur. İlk altı cümle veri dosyalarında tutulur; kalan cümleler dilin özgün kelime havuzlarından çalışma zamanında benzersiz kimliklerle genişletilir. Havuzlar aynı cümlelerin birebir çevirilerinden oluşmaz. Fransızca ve İspanyolcada aksanlı harfler klavyede ayrı tuşlardır; Türkçede I/İ ayrımı korunur. Yeni bulmacayı ilgili JSON dosyasının `puzzles` listesine benzersiz `id`, büyük harfli `text` ve `topic` ile ekleyin. Mevcut kayıtların korunması için yayınlanmış bulmacaların kimliklerini ve metinlerini değiştirmeyin.
 
 ## Kontroller
 
