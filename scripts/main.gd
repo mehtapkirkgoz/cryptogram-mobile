@@ -182,7 +182,10 @@ func start(index: int, is_daily: bool = false) -> void:
 	var puzzle: Dictionary = Languages.puzzles()[index]
 	session_key = "daily_" + Time.get_date_string_from_system() if daily else puzzle.id
 	game = CipherPuzzle.new()
-	game.setup(puzzle.text, Languages.info().alphabet, Progress.state().sessions.get(session_key, {}), starter_hints(index))
+	var saved: Dictionary = Progress.state().sessions.get(session_key, {})
+	if not saved.has("schema") or int(saved.schema) != 2:
+		saved = {}
+	game.setup(puzzle.text, Languages.info().alphabet, saved, starter_hints(index))
 	message = tr_text("instruction")
 	show_game()
 

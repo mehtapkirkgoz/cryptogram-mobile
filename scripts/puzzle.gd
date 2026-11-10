@@ -88,4 +88,4 @@ func occurrence_count() -> int:
 	return occurrences.size()
 
 func serialize() -> Dictionary:
-	return {"guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes}
+	return {"schema": 2, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes}
