@@ -195,7 +195,14 @@ func starter_hints(index: int) -> int:
 	return [4, 3, 2][mini(index, 2)]
 
 func difficulty(index: int) -> String:
-	return [tr_text("easy"), "Orta", "Zor"][mini(index, 2)]
+	var labels := {
+		"tr": ["Kolay", "Orta", "Zor"],
+		"en": ["Easy", "Medium", "Hard"],
+		"de": ["Leicht", "Mittel", "Schwer"],
+		"fr": ["Facile", "Moyen", "Difficile"],
+		"es": ["Fácil", "Medio", "Difícil"]
+	}
+	return labels.get(Languages.current, labels["en"])[mini(index, 2)]
 
 func mistake_limit(index: int) -> int:
 	return 3 if daily or index > 0 else -1
