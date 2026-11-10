@@ -213,13 +213,18 @@ func show_game() -> void:
 	info.add_child(progress_bar)
 	var board := panel(body)
 	var flow := HFlowContainer.new()
-	flow.add_theme_constant_override("h_separation", 12)
-	flow.add_theme_constant_override("v_separation", 16)
+	flow.add_theme_constant_override("h_separation", 16)
+	flow.add_theme_constant_override("v_separation", 20)
 	board.add_child(flow)
+	var word_index := 0
 	for word in game.sentence.split(" "):
+		var word_margin := MarginContainer.new()
+		word_margin.add_theme_constant_override("margin_left", 5 if word_index > 0 else 0)
+		word_margin.add_theme_constant_override("margin_right", 5)
+		flow.add_child(word_margin)
 		var letters := HBoxContainer.new()
 		letters.add_theme_constant_override("separation", 2)
-		flow.add_child(letters)
+		word_margin.add_child(letters)
 		for letter in word:
 			if not game.numbers.has(letter):
 				var punctuation := label_at(letters, letter, 22)
@@ -236,6 +241,7 @@ func show_game() -> void:
 			cell.add_theme_stylebox_override("normal", style)
 			cell.pressed.connect(func(): game.selected = code; show_game())
 			letters.add_child(cell)
+		word_index += 1
 	label_at(body, message if not game.solved() else tr_text("daily_won") if daily else tr_text("won"), 16, BLUE)
 	if game.solved():
 		if not daily and puzzle_index + 1 < Languages.puzzles().size():
