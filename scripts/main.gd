@@ -182,9 +182,17 @@ func start(index: int, is_daily: bool = false) -> void:
 	var puzzle: Dictionary = Languages.puzzles()[index]
 	session_key = "daily_" + Time.get_date_string_from_system() if daily else puzzle.id
 	game = CipherPuzzle.new()
-	game.setup(puzzle.text, Languages.info().alphabet, Progress.state().sessions.get(session_key, {}))
+	game.setup(puzzle.text, Languages.info().alphabet, Progress.state().sessions.get(session_key, {}), starter_hints(index))
 	message = tr_text("instruction")
 	show_game()
+
+func starter_hints(index: int) -> int:
+	if daily:
+		return 1
+	return [2, 1, 0][mini(index, 2)]
+
+func difficulty(index: int) -> String:
+	return [tr_text("easy"), "Orta", "Zor"][mini(index, 2)]
 
 func persist() -> void:
 	Progress.state().sessions[session_key] = game.serialize()
@@ -199,7 +207,7 @@ func show_game() -> void:
 	base()
 	header(tr_text("daily") if daily else "%s %d" % [tr_text("puzzle"), puzzle_index + 1])
 	var info := panel(body)
-	label_at(info, "%s  ·  %s  ·  %d%%" % [tr_text("easy"), Languages.info().name, roundi(game.ratio() * 100)], 17)
+	label_at(info, "%s  ·  %s  ·  %d%%" % [difficulty(puzzle_index), Languages.info().name, roundi(game.ratio() * 100)], 17)
 	var progress_bar := ProgressBar.new()
 	progress_bar.value = game.ratio() * 100
 	progress_bar.show_percentage = false

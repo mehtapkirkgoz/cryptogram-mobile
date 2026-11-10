@@ -10,7 +10,7 @@ var hints := 3
 var mistakes := 0
 var locked: Array = []
 
-func setup(text: String, alphabet: String, saved: Dictionary = {}) -> void:
+func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints: int = 0) -> void:
 	sentence = text
 	for letter in sentence:
 		if alphabet.contains(letter) and not numbers.has(letter):
@@ -23,6 +23,12 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}) -> void:
 	mistakes = int(saved.get("mistakes", 0))
 	for key in saved.get("locked", []):
 		locked.append(int(key))
+	if saved.is_empty() and starter_hints > 0:
+		var codes: Array = answers.keys()
+		codes.sort()
+		for code in codes.slice(0, mini(starter_hints, codes.size())):
+			guesses[code] = answers[code]
+			locked.append(code)
 	select_next()
 
 func enter(letter: String) -> String:
