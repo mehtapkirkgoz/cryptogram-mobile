@@ -188,8 +188,8 @@ func start(index: int, is_daily: bool = false) -> void:
 
 func starter_hints(index: int) -> int:
 	if daily:
-		return 1
-	return [2, 1, 0][mini(index, 2)]
+		return 3
+	return [4, 3, 2][mini(index, 2)]
 
 func difficulty(index: int) -> String:
 	return [tr_text("easy"), "Orta", "Zor"][mini(index, 2)]
