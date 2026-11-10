@@ -1,58 +1,58 @@
 {
-  "name": "Fran?ais",
-  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ????????????????",
+  "name": "Français",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ",
   "keyboard": [
     "AZERTYUIOP",
     "QSDFGHJKLM",
     "WXCVBN",
-    "????????????????"
+    "ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ"
   ],
   "ui": {
-    "tagline": "D?chiffrez vos inspirations",
+    "tagline": "Déchiffrez vos inspirations",
     "play": "Jouer",
-    "daily": "D?fi du jour",
+    "daily": "Défi du jour",
     "levels": "Niveaux",
     "stats": "Statistiques",
     "language": "Langue",
-    "settings": "Param?tres",
+    "settings": "Paramètres",
     "home": "Accueil",
-    "puzzle": "?nigme",
+    "puzzle": "Énigme",
     "progress": "Progression",
-    "reveal": "R?v?ler",
+    "reveal": "Révéler",
     "hint": "Indice",
     "clear": "Effacer",
     "instruction": "Choisissez un nombre puis une lettre.",
-    "won": "Bravo ! ?nigme r?solue.",
-    "next": "?nigme suivante",
-    "completed": "Termin?es",
+    "won": "Bravo ! Énigme résolue.",
+    "next": "Énigme suivante",
+    "completed": "Terminées",
     "mistakes": "Erreurs",
     "sound": "Son",
     "on": "Oui",
     "off": "Non",
     "easy": "Facile",
-    "topic": "Th?me",
-    "duplicate": "Cette lettre appartient ? un autre nombre.",
+    "topic": "Thème",
+    "duplicate": "Cette lettre appartient à un autre nombre.",
     "wrong": "Essayez encore.",
     "no_hints": "Aucun indice disponible.",
-    "cleared": "S?lection effac?e.",
-    "locked": "Verrouill?",
-    "daily_won": "D?fi du jour termin? !",
+    "cleared": "Sélection effacée.",
+    "locked": "Verrouillé",
+    "daily_won": "Défi du jour terminé !",
     "continue": "Continuer"
   },
   "puzzles": [
     {
       "id": "fr_1",
       "text": "CHAQUE PAS DESSINE UN NOUVEAU CHEMIN.",
-      "topic": "Progr?s"
+      "topic": "Progrès"
     },
     {
       "id": "fr_2",
-      "text": "LA CURIOSIT? ?CLAIRE NOS JOURN?ES.",
-      "topic": "Curiosit?"
+      "text": "LA CURIOSITÉ ÉCLAIRE NOS JOURNÉES.",
+      "topic": "Curiosité"
     },
     {
       "id": "fr_3",
-      "text": "UNE ID?E GRANDIT QUAND ON LA PARTAGE.",
+      "text": "UNE IDÉE GRANDIT QUAND ON LA PARTAGE.",
       "topic": "Partage"
     }
   ]

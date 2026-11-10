@@ -1,58 +1,58 @@
 {
-  "name": "T?rk?e",
-  "alphabet": "ABC?DEFG?HI?JKLMNO?PRS?TU?VYZ",
+  "name": "Türkçe",
+  "alphabet": "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ",
   "keyboard": [
-    "QWERTYUIOP??",
-    "ASDFGHJKL??",
-    "ZXCVBNM??"
+    "QWERTYUIOPĞÜ",
+    "ASDFGHJKLŞİ",
+    "ZXCVBNMÖÇ"
   ],
   "ui": {
-    "tagline": "?ifreli c?mleleri ??z",
-    "play": "Oyuna Ba?la",
-    "daily": "G?nl?k Bulmaca",
+    "tagline": "Şifreli cümleleri çöz",
+    "play": "Oyuna Başla",
+    "daily": "Günlük Bulmaca",
     "levels": "Seviyeler",
-    "stats": "?statistikler",
-    "language": "Dil Se?imi",
+    "stats": "İstatistikler",
+    "language": "Dil Seçimi",
     "settings": "Ayarlar",
     "home": "Ana Sayfa",
     "puzzle": "Bulmaca",
-    "progress": "?lerleme",
-    "reveal": "Harf A?",
-    "hint": "?pucu",
+    "progress": "İlerleme",
+    "reveal": "Harf Aç",
+    "hint": "İpucu",
     "clear": "Temizle",
-    "instruction": "Bir say? se?, ard?ndan bir harfe dokun.",
-    "won": "Harika! Bulmacay? ??zd?n.",
+    "instruction": "Bir sayı seç, ardından bir harfe dokun.",
+    "won": "Harika! Bulmacayı çözdün.",
     "next": "Sonraki bulmaca",
     "completed": "Tamamlanan",
     "mistakes": "Hatalar",
     "sound": "Ses",
-    "on": "A??k",
-    "off": "Kapal?",
+    "on": "Açık",
+    "off": "Kapalı",
     "easy": "Kolay",
     "topic": "Konu",
-    "duplicate": "Bu harf ba?ka bir say?ya ait.",
+    "duplicate": "Bu harf başka bir sayıya ait.",
     "wrong": "Tekrar dene.",
-    "no_hints": "?pu?lar?n bitti.",
-    "cleared": "Se?ili say? silindi.",
-    "locked": "Hen?z a??lmad?",
-    "daily_won": "G?nl?k bulmaca tamamland?!",
+    "no_hints": "İpuçların bitti.",
+    "cleared": "Seçili sayı silindi.",
+    "locked": "Henüz açılmadı",
+    "daily_won": "Günlük bulmaca tamamlandı!",
     "continue": "Devam Et"
   },
   "puzzles": [
     {
       "id": "tr_1",
-      "text": "K???K ADIMLAR B?Y?K YOLLAR A?AR.",
-      "topic": "Geli?im"
+      "text": "KÜÇÜK ADIMLAR BÜYÜK YOLLAR AÇAR.",
+      "topic": "Gelişim"
     },
     {
       "id": "tr_2",
-      "text": "B?R F?K?R YEN? B?R KAPI A?AR.",
+      "text": "BİR FİKİR YENİ BİR KAPI AÇAR.",
       "topic": "Merak"
     },
     {
       "id": "tr_3",
-      "text": "BUG?N KEND? H?KAYEN? YAZ.",
-      "topic": "Yeni ba?lang??"
+      "text": "BUGÜN KENDİ HİKAYENİ YAZ.",
+      "topic": "Yeni başlangıç"
     }
   ]
 }

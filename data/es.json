@@ -1,18 +1,18 @@
 {
-  "name": "Espa?ol",
-  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ???????",
+  "name": "Español",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZÑÁÉÍÓÚÜ",
   "keyboard": [
     "QWERTYUIOP",
-    "ASDFGHJKL?",
+    "ASDFGHJKLÑ",
     "ZXCVBNM",
-    "??????"
+    "ÁÉÍÓÚÜ"
   ],
   "ui": {
     "tagline": "Descifra nuevas ideas",
     "play": "Jugar",
     "daily": "Reto diario",
     "levels": "Niveles",
-    "stats": "Estad?sticas",
+    "stats": "Estadísticas",
     "language": "Idioma",
     "settings": "Ajustes",
     "home": "Inicio",
@@ -21,22 +21,22 @@
     "reveal": "Revelar",
     "hint": "Pista",
     "clear": "Borrar",
-    "instruction": "Elige un n?mero y luego una letra.",
-    "won": "?Muy bien! Enigma resuelto.",
+    "instruction": "Elige un número y luego una letra.",
+    "won": "¡Muy bien! Enigma resuelto.",
     "next": "Siguiente enigma",
     "completed": "Completados",
     "mistakes": "Errores",
     "sound": "Sonido",
-    "on": "S?",
+    "on": "Sí",
     "off": "No",
-    "easy": "F?cil",
+    "easy": "Fácil",
     "topic": "Tema",
-    "duplicate": "Esta letra pertenece a otro n?mero.",
-    "wrong": "Int?ntalo de nuevo.",
+    "duplicate": "Esta letra pertenece a otro número.",
+    "wrong": "Inténtalo de nuevo.",
     "no_hints": "No quedan pistas.",
-    "cleared": "Selecci?n borrada.",
+    "cleared": "Selección borrada.",
     "locked": "Bloqueado",
-    "daily_won": "?Reto diario completado!",
+    "daily_won": "¡Reto diario completado!",
     "continue": "Continuar"
   },
   "puzzles": [
@@ -47,7 +47,7 @@
     },
     {
       "id": "es_2",
-      "text": "LA CURIOSIDAD LLENA EL D?A DE COLOR.",
+      "text": "LA CURIOSIDAD LLENA EL DÍA DE COLOR.",
       "topic": "Curiosidad"
     },
     {

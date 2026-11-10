@@ -103,9 +103,12 @@ func home() -> void:
 	var top := row(body)
 	label_at(top, "C R Y P T O G R A M", 13, MUTED)
 	button_at(top, "⚙", settings).size_flags_horizontal = Control.SIZE_SHRINK_END
-	var emblem := panel(body)
-	label_at(emblem, "◇", 65, BLUE)
-	label_at(emblem, "A  ?  K  ?  R", 30, BLUE)
+	var emblem := TextureRect.new()
+	emblem.texture = preload("res://assets/mark.svg")
+	emblem.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	emblem.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	emblem.custom_minimum_size.y = 170
+	body.add_child(emblem)
 	label_at(body, "Cryptogram", 46)
 	label_at(body, tr_text("tagline"), 20, MUTED)
 	var completed: Array = Progress.state().completed
@@ -145,7 +148,7 @@ func levels() -> void:
 	header(tr_text("levels"))
 	for i in range(Languages.puzzles().size()):
 		var done: bool = Progress.state().completed.has(Languages.puzzles()[i].id)
-		var unlocked := i == 0 or Progress.state().completed.has(Languages.puzzles()[i - 1].id)
+		var unlocked: bool = i == 0 or Progress.state().completed.has(Languages.puzzles()[i - 1].id)
 		var caption := "%02d   %s   %s" % [i + 1, Languages.puzzles()[i].topic, "✓" if done else ""]
 		var button := button_at(body, caption if unlocked else caption + " · " + tr_text("locked"), func(): start(i))
 		button.disabled = not unlocked
@@ -201,8 +204,12 @@ func show_game() -> void:
 	progress_bar.value = game.ratio() * 100
 	progress_bar.show_percentage = false
 	progress_bar.custom_minimum_size.y = 8
-	progress_bar.add_theme_stylebox_override("background", box(PALE, PALE))
-	progress_bar.add_theme_stylebox_override("fill", box(BLUE, BLUE))
+	var track := box(PALE, PALE)
+	track.set_content_margin_all(0)
+	var fill := box(BLUE, BLUE)
+	fill.set_content_margin_all(0)
+	progress_bar.add_theme_stylebox_override("background", track)
+	progress_bar.add_theme_stylebox_override("fill", fill)
 	info.add_child(progress_bar)
 	var board := panel(body)
 	var flow := HFlowContainer.new()
@@ -215,7 +222,8 @@ func show_game() -> void:
 		flow.add_child(letters)
 		for letter in word:
 			if not game.numbers.has(letter):
-				label_at(letters, letter, 22)
+				var punctuation := label_at(letters, letter, 22)
+				punctuation.custom_minimum_size.x = 10
 				continue
 			var code: int = game.numbers[letter]
 			var cell := Button.new()
