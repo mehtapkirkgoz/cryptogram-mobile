@@ -25,9 +25,9 @@ func run() -> void:
 		if "--capture" in OS.get_cmdline_user_args() and code == "tr":
 			await RenderingServer.frame_post_draw
 			root.get_texture().get_image().save_png(OS.get_environment("TEMP").path_join("cryptogram-puzzle.png"))
-		for number in app.game.answers:
-			app.game.selected = number
-			app.game.enter(app.game.answers[number])
+		for occurrence_index in range(app.game.occurrence_count()):
+			app.game.selected = occurrence_index
+			app.game.enter(app.game.occurrences[occurrence_index].letter)
 		app.show_game()
 		await get_tree().process_frame
 		assert(app.game.solved())

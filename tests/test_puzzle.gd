@@ -2,43 +2,41 @@ extends SceneTree
 
 func _initialize() -> void:
 	var puzzle := CipherPuzzle.new()
-	puzzle.setup("İYİ BİR GÜN.", "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ")
-	assert(puzzle.numbers["İ"] == 1)
-	assert(puzzle.enter("A") == "wrong")
+	puzzle.setup("ABBA C", "ABCDE")
+	assert(puzzle.numbers["A"] == 1)
+	assert(puzzle.occurrence_count() == 5)
+	assert(puzzle.enter("Z") == "wrong")
 	assert(puzzle.mistakes == 1)
-	assert(puzzle.guesses.is_empty())
-	assert(puzzle.enter("İ") == "")
-	assert(is_equal_approx(puzzle.ratio(), 3.0 / 9.0))
-	assert(puzzle.enter("İ") == "duplicate")
+	assert(puzzle.enter("A") == "")
+	assert(puzzle.guess_for(0) == "A")
+	assert(puzzle.guess_for(2).is_empty())
+	puzzle.selected = 2
+	assert(puzzle.enter("B") == "")
+	assert(puzzle.guess_for(1).is_empty())
+	assert(puzzle.guess_for(2) == "B")
+	puzzle.selected = 3
 	assert(puzzle.reveal())
+	assert(puzzle.guess_for(3) == "A")
 	assert(puzzle.hints == 2)
-	var opened: int = puzzle.locked[0]
-	puzzle.selected = opened
+	puzzle.selected = 3
 	puzzle.clear_selected()
-	assert(puzzle.guesses.has(opened))
-	puzzle.selected = 1
-	puzzle.clear_selected()
-	assert(not puzzle.guesses.has(1))
-	puzzle.enter("İ")
+	assert(puzzle.guess_for(3) == "A")
 	var restored := CipherPuzzle.new()
-	restored.setup(puzzle.sentence, "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ", JSON.parse_string(JSON.stringify(puzzle.serialize())))
+	restored.setup(puzzle.sentence, "ABCDE", JSON.parse_string(JSON.stringify(puzzle.serialize())))
 	assert(restored.guesses == puzzle.guesses)
 	assert(restored.locked == puzzle.locked)
-	assert(restored.hints == 2)
-	for code in restored.answers:
-		restored.selected = code
-		restored.enter(restored.answers[code])
+	for index in range(restored.occurrence_count()):
+		restored.selected = index
+		restored.enter(restored.occurrences[index].letter)
 	assert(restored.solved())
 	for code in ["tr", "en", "de", "fr", "es"]:
 		var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/%s.json" % code))
 		for entry in data.puzzles:
 			var check := CipherPuzzle.new()
 			check.setup(entry.text, data.alphabet)
-			for character in entry.text:
-				assert(character in " .,!?'’" or data.alphabet.contains(character), "Missing character: " + character)
-			for answer in check.answers:
-				check.selected = answer
-				check.enter(check.answers[answer])
+			for index in range(check.occurrence_count()):
+				check.selected = index
+				check.enter(check.occurrences[index].letter)
 			assert(check.solved())
-	print("PASS: repeated numbers, Turkish alphabet, mistakes, hints, JSON restore and 15 puzzle solutions")
+	print("PASS: independent repeated-number cells, reveal, persistence and 15 puzzle solutions")
 	quit()

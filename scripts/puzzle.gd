@@ -4,8 +4,9 @@ extends RefCounted
 var sentence := ""
 var numbers: Dictionary = {}
 var answers: Dictionary = {}
+var occurrences: Array = []
 var guesses: Dictionary = {}
-var selected := 1
+var selected := 0
 var hints := 3
 var mistakes := 0
 var locked: Array = []
@@ -17,6 +18,9 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 			var code = numbers.size() + 1
 			numbers[letter] = code
 			answers[code] = letter
+	for letter in sentence:
+		if numbers.has(letter):
+			occurrences.append({"letter": letter, "code": numbers[letter]})
 	for key in saved.get("guesses", {}):
 		guesses[int(key)] = saved.guesses[key]
 	hints = int(saved.get("hints", 3))
@@ -27,17 +31,21 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 		var codes: Array = answers.keys()
 		codes.sort()
 		for code in codes.slice(0, mini(starter_hints, codes.size())):
-			guesses[code] = answers[code]
-			locked.append(code)
+			for index in range(occurrences.size()):
+				if occurrences[index].code == code:
+					guesses[index] = answers[code]
+					locked.append(index)
+					break
 	select_next()
+
+func guess_for(index: int) -> String:
+	return str(guesses.get(index, ""))
 
 func enter(letter: String) -> String:
 	if locked.has(selected) or solved():
 		return ""
-	for code in guesses:
-		if guesses[code] == letter and code != selected:
-			return "duplicate"
-	if answers.get(selected) != letter:
+	var code: int = occurrences[selected].code
+	if answers.get(code) != letter:
 		mistakes += 1
 		return "wrong"
 	guesses[selected] = letter
@@ -45,9 +53,9 @@ func enter(letter: String) -> String:
 	return ""
 
 func select_next() -> void:
-	for code in answers:
-		if not guesses.has(code):
-			selected = code
+	for index in range(occurrences.size()):
+		if not guesses.has(index):
+			selected = index
 			return
 
 func reveal() -> bool:
@@ -55,7 +63,8 @@ func reveal() -> bool:
 		return false
 	if guesses.has(selected):
 		select_next()
-	guesses[selected] = answers[selected]
+	var code: int = occurrences[selected].code
+	guesses[selected] = answers[code]
 	locked.append(selected)
 	hints -= 1
 	select_next()
@@ -66,17 +75,17 @@ func clear_selected() -> void:
 		guesses.erase(selected)
 
 func ratio() -> float:
-	var total := 0
 	var filled := 0
-	for letter in sentence:
-		if numbers.has(letter):
-			total += 1
-			if guesses.get(numbers[letter]) == letter:
-				filled += 1
-	return float(filled) / maxi(total, 1)
+	for index in range(occurrences.size()):
+		if guesses.get(index) == occurrences[index].letter:
+			filled += 1
+	return float(filled) / maxi(occurrences.size(), 1)
 
 func solved() -> bool:
 	return ratio() == 1.0
+
+func occurrence_count() -> int:
+	return occurrences.size()
 
 func serialize() -> Dictionary:
 	return {"guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes}

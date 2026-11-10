@@ -225,6 +225,7 @@ func show_game() -> void:
 	flow.add_theme_constant_override("v_separation", 20)
 	board.add_child(flow)
 	var word_index := 0
+	var occurrence_index := 0
 	for word in game.sentence.split(" "):
 		var word_margin := MarginContainer.new()
 		word_margin.add_theme_constant_override("margin_left", 5 if word_index > 0 else 0)
@@ -239,16 +240,19 @@ func show_game() -> void:
 				punctuation.custom_minimum_size.x = 10
 				continue
 			var code: int = game.numbers[letter]
+			var cell_index := occurrence_index
 			var cell := Button.new()
-			cell.text = "%d\n%s" % [code, game.guesses.get(code, "_")]
+			var visible_guess := game.guess_for(cell_index)
+			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
 			cell.custom_minimum_size = Vector2(29, 64)
 			cell.add_theme_font_size_override("font_size", 18)
-			var style := box(PALE if code == game.selected else Color("f4f6fb"), BLUE if code == game.selected else Color("e0e6f0"))
+			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
 			style.set_content_margin_all(2)
 			style.set_corner_radius_all(7)
 			cell.add_theme_stylebox_override("normal", style)
-			cell.pressed.connect(func(): game.selected = code; show_game())
+			cell.pressed.connect(func(): game.selected = cell_index; show_game())
 			letters.add_child(cell)
+			occurrence_index += 1
 		word_index += 1
 	label_at(body, message if not game.solved() else tr_text("daily_won") if daily else tr_text("won"), 16, BLUE)
 	if game.solved():
