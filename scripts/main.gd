@@ -262,7 +262,7 @@ func show_game() -> void:
 			cell.add_theme_color_override("font_color", INK)
 			cell.add_theme_color_override("font_hover_color", INK)
 			cell.add_theme_color_override("font_pressed_color", INK)
-			cell.pressed.connect(func(): game.selected = cell_index; show_game())
+			cell.pressed.connect(select_cell.bind(cell_index))
 			letters.add_child(cell)
 			occurrence_index += 1
 		word_index += 1
@@ -280,7 +280,7 @@ func show_game() -> void:
 		var key_row := row(body)
 		key_row.add_theme_constant_override("separation", 3)
 		for letter in keys:
-			var key := button_at(key_row, letter, func(): enter(letter))
+			var key := button_at(key_row, letter, enter.bind(letter))
 			key.custom_minimum_size = Vector2(0, 46)
 			key.add_theme_font_size_override("font_size", 16)
 			for state in ["normal", "hover", "pressed", "focus"]:
@@ -299,6 +299,10 @@ func enter(letter: String) -> void:
 	Progress.state().mistakes += game.mistakes - previous
 	message = tr_text(result) if not result.is_empty() else tr_text("instruction")
 	persist()
+	show_game()
+
+func select_cell(index: int) -> void:
+	game.selected = index
 	show_game()
 
 func reveal() -> void:
