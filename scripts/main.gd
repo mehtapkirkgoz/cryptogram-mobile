@@ -250,7 +250,6 @@ func show_game() -> void:
 			var cell := Button.new()
 			var visible_guess := game.guess_for(cell_index)
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
-			cell.tooltip_text = "Sayı: %d" % code
 			cell.custom_minimum_size = Vector2(29, 64)
 			cell.add_theme_font_size_override("font_size", 18)
 			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
