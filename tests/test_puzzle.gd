@@ -3,7 +3,7 @@ extends SceneTree
 func _initialize() -> void:
 	var puzzle := CipherPuzzle.new()
 	puzzle.setup("ABBA C", "ABCDE")
-	assert(puzzle.numbers["A"] >= 1 and puzzle.numbers["A"] <= 50)
+	assert(puzzle.numbers["A"] >= 0 and puzzle.numbers["A"] <= 30)
 	assert(puzzle.numbers["A"] != puzzle.numbers["B"])
 	assert(puzzle.occurrence_count() == 5)
 	assert(puzzle.enter("Z") == "wrong")

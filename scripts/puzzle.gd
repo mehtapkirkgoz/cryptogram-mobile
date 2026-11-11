@@ -16,7 +16,7 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 	sentence = text
 	var random := RandomNumberGenerator.new()
 	random.seed = absi(sentence.hash())
-	var available_numbers: Array = range(1, 51)
+	var available_numbers: Array = range(0, 31)
 	_shuffle(available_numbers, random)
 	for letter in sentence:
 		if alphabet.contains(letter) and not numbers.has(letter):
@@ -107,4 +107,4 @@ func occurrence_count() -> int:
 	return occurrences.size()
 
 func serialize() -> Dictionary:
-	return {"schema": 5, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes, "mistake_limit": mistake_limit}
+	return {"schema": 6, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes, "mistake_limit": mistake_limit}
