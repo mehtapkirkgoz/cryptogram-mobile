@@ -14,9 +14,13 @@ var locked: Array = []
 
 func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints: int = 0, limit: int = -1) -> void:
 	sentence = text
+	var random := RandomNumberGenerator.new()
+	random.seed = absi(sentence.hash())
+	var available_numbers: Array = range(1, 51)
+	_shuffle(available_numbers, random)
 	for letter in sentence:
 		if alphabet.contains(letter) and not numbers.has(letter):
-			var code = numbers.size() + 1
+			var code: int = available_numbers.pop_back()
 			numbers[letter] = code
 			answers[code] = letter
 	for letter in sentence:
@@ -31,7 +35,7 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 		locked.append(int(key))
 	if saved.is_empty() and starter_hints > 0:
 		var codes: Array = answers.keys()
-		codes.sort()
+		_shuffle(codes, random)
 		for code in codes.slice(0, mini(starter_hints, codes.size())):
 			for index in range(occurrences.size()):
 				if occurrences[index].code == code:
@@ -42,6 +46,13 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 
 func guess_for(index: int) -> String:
 	return str(guesses.get(index, ""))
+
+func _shuffle(values: Array, random: RandomNumberGenerator) -> void:
+	for index in range(values.size() - 1, 0, -1):
+		var swap_index := random.randi_range(0, index)
+		var value = values[index]
+		values[index] = values[swap_index]
+		values[swap_index] = value
 
 func enter(letter: String) -> String:
 	if locked.has(selected) or solved() or game_over():
@@ -96,4 +107,4 @@ func occurrence_count() -> int:
 	return occurrences.size()
 
 func serialize() -> Dictionary:
-	return {"schema": 4, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes, "mistake_limit": mistake_limit}
+	return {"schema": 5, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes, "mistake_limit": mistake_limit}

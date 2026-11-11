@@ -7,6 +7,7 @@ func run() -> void:
 	var app = load("res://scenes/main.tscn").instantiate()
 	var root := get_tree().root
 	root.add_child(app)
+	Progress.state().sessions.clear()
 	var original_language: String = Languages.current
 	for code in Languages.CODES:
 		assert(Languages.puzzles().size() == 100)
