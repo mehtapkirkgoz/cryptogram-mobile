@@ -2,9 +2,9 @@
   "name": "Türkçe",
   "alphabet": "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ",
   "keyboard": [
-    "QWERTYUIOPĞÜ",
+    "ERTYUIOPĞÜ",
     "ASDFGHJKLŞİ",
-    "ZXCVBNMÖÇ"
+    "ZCVBNMÖÇ"
   ],
   "ui": {
     "tagline": "Şifreli cümleleri çöz",
