@@ -319,8 +319,8 @@ func show_game() -> void:
 		key_row.add_theme_constant_override("separation", 3)
 		for letter in keys:
 			var key := button_at(key_row, letter, enter.bind(letter))
-			key.custom_minimum_size = Vector2(0, 46)
-			key.add_theme_font_size_override("font_size", 16)
+			key.custom_minimum_size = Vector2(0, 52)
+			key.add_theme_font_size_override("font_size", 17)
 			for state in ["normal", "hover", "pressed", "focus"]:
 				var style := box(Color("fcfcff"))
 				style.set_content_margin_all(1)
