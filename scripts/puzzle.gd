@@ -9,7 +9,6 @@ var guesses: Dictionary = {}
 var selected := 0
 var hints := 3
 var mistakes := 0
-var mistake_limit := -1
 var locked: Array = []
 
 func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints: int = 0, limit: int = -1) -> void:
@@ -30,7 +29,6 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 		guesses[int(key)] = saved.guesses[key]
 	hints = int(saved.get("hints", 3))
 	mistakes = int(saved.get("mistakes", 0))
-	mistake_limit = int(saved.get("mistake_limit", limit))
 	for key in saved.get("locked", []):
 		locked.append(int(key))
 	if saved.is_empty() and starter_hints > 0:
@@ -55,32 +53,26 @@ func _shuffle(values: Array, random: RandomNumberGenerator) -> void:
 		values[swap_index] = value
 
 func enter(letter: String) -> String:
-	if locked.has(selected) or solved() or game_over():
+	if locked.has(selected) or solved():
 		return ""
 	var code: int = occurrences[selected].code
+	guesses[selected] = letter
 	if answers.get(code) != letter:
 		mistakes += 1
 		return "wrong"
-	guesses[selected] = letter
 	select_next()
 	return ""
 
-func game_over() -> bool:
-	return mistake_limit > 0 and mistakes >= mistake_limit
-
-func mistakes_left() -> int:
-	return -1 if mistake_limit < 0 else maxi(mistake_limit - mistakes, 0)
-
 func select_next() -> void:
 	for index in range(occurrences.size()):
-		if not guesses.has(index):
+		if guesses.get(index, "") != occurrences[index].letter:
 			selected = index
 			return
 
 func reveal() -> bool:
 	if hints <= 0 or solved():
 		return false
-	if guesses.has(selected):
+	if guesses.get(selected, "") == answers[occurrences[selected].code]:
 		select_next()
 	var code: int = occurrences[selected].code
 	guesses[selected] = answers[code]
@@ -107,4 +99,4 @@ func occurrence_count() -> int:
 	return occurrences.size()
 
 func serialize() -> Dictionary:
-	return {"schema": 6, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes, "mistake_limit": mistake_limit}
+	return {"schema": 6, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes}
