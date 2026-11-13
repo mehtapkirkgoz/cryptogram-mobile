@@ -84,8 +84,10 @@ func select_next() -> void:
 func reveal() -> bool:
 	if hints <= 0 or solved():
 		return false
-	if guesses.get(selected, "") == answers[occurrences[selected].code]:
+	if locked.has(selected) or guesses.get(selected, "") == occurrences[selected].letter:
 		select_next()
+	if locked.has(selected) or guesses.get(selected, "") == occurrences[selected].letter:
+		return false
 	var code: int = occurrences[selected].code
 	guesses[selected] = answers[code]
 	locked.append(selected)
