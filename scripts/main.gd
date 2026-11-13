@@ -279,7 +279,7 @@ func show_game() -> void:
 			var cell := Button.new()
 			var visible_guess := game.guess_for(cell_index)
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
-			cell.custom_minimum_size = Vector2(32, 64)
+			cell.custom_minimum_size = Vector2(34, 66)
 			cell.add_theme_font_size_override("font_size", 18)
 			var is_selected := cell_index == game.selected
 			var is_wrong := not visible_guess.is_empty() and visible_guess != letter
