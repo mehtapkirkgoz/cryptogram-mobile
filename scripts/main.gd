@@ -110,19 +110,20 @@ func home() -> void:
 	emblem.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	emblem.custom_minimum_size.y = 170
 	body.add_child(emblem)
-	label_at(body, "Cryptogram", 46)
-	label_at(body, tr_text("tagline"), 20, MUTED)
+	label_at(body, "Cryptogram", 40)
+	label_at(body, tr_text("tagline"), 18, MUTED)
 	var completed: Array = Progress.state().completed
 	var index := mini(completed.size(), Languages.puzzles().size() - 1)
 	button_at(body, "▶   " + tr_text("play"), func(): begin_play(index), true).custom_minimum_size.y = 70
 	var shortcuts := row(body)
-	button_at(shortcuts, "▦\n" + tr_text("daily"), start_daily)
-	button_at(shortcuts, "◇\n" + tr_text("levels"), levels)
-	button_at(shortcuts, "▥\n" + tr_text("stats"), stats)
+	for item in [[tr_text("daily"), start_daily], [tr_text("levels"), levels], [tr_text("stats"), stats]]:
+		var shortcut := button_at(shortcuts, item[0], item[1])
+		shortcut.custom_minimum_size.y = 72
+		shortcut.add_theme_font_size_override("font_size", 14)
 	var language_card := panel(body)
 	label_at(language_card, tr_text("language"), 22)
 	var grid := GridContainer.new()
-	grid.columns = 3
+	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 8)
 	grid.add_theme_constant_override("v_separation", 8)
 	language_card.add_child(grid)
@@ -282,7 +283,7 @@ func show_game() -> void:
 				cell.add_theme_color_override("font_color", Color("c53c50"))
 				cell.add_theme_color_override("font_hover_color", Color("c53c50"))
 				cell.add_theme_color_override("font_pressed_color", Color("c53c50"))
-			cell.custom_minimum_size = Vector2(29, 64)
+			cell.custom_minimum_size = Vector2(32, 64)
 			cell.add_theme_font_size_override("font_size", 18)
 			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
 			style.set_content_margin_all(2)
