@@ -209,7 +209,7 @@ func puzzle_score(index: int) -> int:
 
 func starter_hints(index: int) -> int:
 	var score := puzzle_score(index)
-	return 3 if score < 25 else 2 if score < 40 else 1
+	return 3
 
 func difficulty(index: int) -> String:
 	var labels := {
@@ -235,7 +235,7 @@ func show_game() -> void:
 	base()
 	header(tr_text("daily") if daily else "%s %d" % [tr_text("puzzle"), puzzle_index + 1])
 	var info := panel(body)
-	label_at(info, "%s  ·  %s  ·  %d%%" % [Languages.info().name, difficulty(puzzle_index), roundi(game.ratio() * 100)], 17)
+	label_at(info, "%s  ·  %d%%" % [Languages.info().name, roundi(game.ratio() * 100)], 17)
 	if tutorial and not game.solved():
 		var guide := label_at(body, tr_text("instruction"), 17, BLUE)
 		guide.modulate = Color(1, 1, 1, 0.35)
