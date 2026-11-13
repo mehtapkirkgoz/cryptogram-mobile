@@ -73,7 +73,12 @@ func enter(letter: String) -> String:
 	return ""
 
 func select_next() -> void:
-	for index in range(occurrences.size()):
+	if occurrences.is_empty():
+		return
+	for step in range(1, occurrences.size() + 1):
+		var index := (selected + step) % occurrences.size()
+		if locked.has(index):
+			continue
 		if guesses.get(index, "") != occurrences[index].letter:
 			selected = index
 			return
