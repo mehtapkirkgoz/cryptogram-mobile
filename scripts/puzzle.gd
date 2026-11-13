@@ -10,6 +10,7 @@ var selected := 0
 var hints := 3
 var mistakes := 0
 var locked: Array = []
+var starting_clues: Array = []
 
 func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints: int = 0, limit: int = -1) -> void:
 	sentence = text
@@ -41,10 +42,14 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 				if occurrences[index].code == code:
 					starting_indices.append(index)
 					break
-		# Keep player guesses, but only three clues are fixed.
-		for index in locked.duplicate():
-			if not starting_indices.has(index):
-				locked.erase(index)
+		starting_clues = starting_indices
+		# Preserve previous entries and any hints the player revealed.
+		var old_clues: Array = saved.get("starting_clues", [])
+		if old_clues.is_empty():
+			old_clues = starting_indices.slice(0, mini(3, starting_indices.size()))
+		for index in old_clues:
+			if not starting_indices.has(int(index)):
+				locked.erase(int(index))
 		for index in starting_indices:
 			guesses[index] = occurrences[index].letter
 			if not locked.has(index):
@@ -113,4 +118,4 @@ func occurrence_count() -> int:
 	return occurrences.size()
 
 func serialize() -> Dictionary:
-	return {"schema": 6, "guesses": guesses, "locked": locked, "hints": hints, "mistakes": mistakes}
+	return {"schema": 6, "guesses": guesses, "locked": locked, "starting_clues": starting_clues, "hints": hints, "mistakes": mistakes}
