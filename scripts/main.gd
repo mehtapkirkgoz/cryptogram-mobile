@@ -196,8 +196,19 @@ func start(index: int, is_daily: bool = false) -> void:
 	message = tr_text("instruction")
 	show_game()
 
+func puzzle_score(index: int) -> int:
+	var sentence: String = Languages.puzzles()[index].text
+	var unique_letters := {}
+	var letter_count := 0
+	for letter in sentence:
+		if Languages.info().alphabet.contains(letter):
+			unique_letters[letter] = true
+			letter_count += 1
+	return unique_letters.size() * 2 + letter_count / 4
+
 func starter_hints(index: int) -> int:
-	return 2 if index < 10 else 1 if index < 35 else 0
+	var score := puzzle_score(index)
+	return 3 if score < 25 else 2 if score < 40 else 1
 
 func difficulty(index: int) -> String:
 	var labels := {
@@ -207,7 +218,8 @@ func difficulty(index: int) -> String:
 		"fr": ["Facile", "Moyen", "Difficile"],
 		"es": ["Fácil", "Medio", "Difícil"]
 	}
-	return labels.get(Languages.current, labels["en"])[0 if index < 10 else 1 if index < 35 else 2]
+	var score := puzzle_score(index)
+	return labels.get(Languages.current, labels["en"])[0 if score < 25 else 1 if score < 40 else 2]
 
 func persist() -> void:
 	Progress.state().sessions[session_key] = game.serialize()
@@ -222,7 +234,7 @@ func show_game() -> void:
 	base()
 	header(tr_text("daily") if daily else "%s %d" % [tr_text("puzzle"), puzzle_index + 1])
 	var info := panel(body)
-	label_at(info, "%s  ·  %d%%" % [Languages.info().name, roundi(game.ratio() * 100)], 17)
+	label_at(info, "%s  ·  %s  ·  %d%%" % [Languages.info().name, difficulty(puzzle_index), roundi(game.ratio() * 100)], 17)
 	if tutorial and not game.solved():
 		var guide := label_at(body, tr_text("instruction"), 17, BLUE)
 		guide.modulate = Color(1, 1, 1, 0.35)
@@ -268,6 +280,8 @@ func show_game() -> void:
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
 			if not visible_guess.is_empty() and visible_guess != letter:
 				cell.add_theme_color_override("font_color", Color("c53c50"))
+				cell.add_theme_color_override("font_hover_color", Color("c53c50"))
+				cell.add_theme_color_override("font_pressed_color", Color("c53c50"))
 			cell.custom_minimum_size = Vector2(29, 64)
 			cell.add_theme_font_size_override("font_size", 18)
 			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
