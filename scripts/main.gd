@@ -279,10 +279,6 @@ func show_game() -> void:
 			var cell := Button.new()
 			var visible_guess := game.guess_for(cell_index)
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
-			if not visible_guess.is_empty() and visible_guess != letter:
-				cell.add_theme_color_override("font_color", Color("c53c50"))
-				cell.add_theme_color_override("font_hover_color", Color("c53c50"))
-				cell.add_theme_color_override("font_pressed_color", Color("c53c50"))
 			cell.custom_minimum_size = Vector2(32, 64)
 			cell.add_theme_font_size_override("font_size", 18)
 			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
@@ -295,6 +291,10 @@ func show_game() -> void:
 			cell.add_theme_color_override("font_color", INK)
 			cell.add_theme_color_override("font_hover_color", INK)
 			cell.add_theme_color_override("font_pressed_color", INK)
+			if not visible_guess.is_empty() and visible_guess != letter:
+				cell.add_theme_color_override("font_color", Color("c53c50"))
+				cell.add_theme_color_override("font_hover_color", Color("c53c50"))
+				cell.add_theme_color_override("font_pressed_color", Color("c53c50"))
 			cell.pressed.connect(select_cell.bind(cell_index))
 			letters.add_child(cell)
 			occurrence_index += 1
