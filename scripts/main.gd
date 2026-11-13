@@ -238,6 +238,11 @@ func show_game() -> void:
 	flow.add_theme_constant_override("h_separation", 8)
 	flow.add_theme_constant_override("v_separation", 12)
 	board.add_child(flow)
+	var longest_word := 1
+	for word in game.sentence.split(" "):
+		longest_word = maxi(longest_word, word.length())
+	var available_width := maxf(260.0, get_viewport_rect().size.x - 94.0)
+	var letter_width := minf(34.0, (available_width - 12.0) / longest_word - 2.0)
 	var word_index := 0
 	var occurrence_index := 0
 	for word in game.sentence.split(" "):
@@ -258,8 +263,8 @@ func show_game() -> void:
 			var cell := Button.new()
 			var visible_guess := game.guess_for(cell_index)
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
-			cell.custom_minimum_size = Vector2(34, 66)
-			cell.add_theme_font_size_override("font_size", 18)
+			cell.custom_minimum_size = Vector2(letter_width, 66)
+			cell.add_theme_font_size_override("font_size", 16 if letter_width < 30 else 18)
 			var is_selected := cell_index == game.selected
 			var is_wrong := not visible_guess.is_empty() and visible_guess != letter
 			var is_clue := game.locked.has(cell_index)
