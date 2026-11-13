@@ -234,15 +234,16 @@ func show_game() -> void:
 	info.add_child(progress_bar)
 	var board := panel(body)
 	var flow := HFlowContainer.new()
-	flow.add_theme_constant_override("h_separation", 16)
-	flow.add_theme_constant_override("v_separation", 20)
+	flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	flow.add_theme_constant_override("h_separation", 8)
+	flow.add_theme_constant_override("v_separation", 12)
 	board.add_child(flow)
 	var word_index := 0
 	var occurrence_index := 0
 	for word in game.sentence.split(" "):
 		var word_margin := MarginContainer.new()
-		word_margin.add_theme_constant_override("margin_left", 5 if word_index > 0 else 0)
-		word_margin.add_theme_constant_override("margin_right", 5)
+		word_margin.add_theme_constant_override("margin_left", 2 if word_index > 0 else 0)
+		word_margin.add_theme_constant_override("margin_right", 2)
 		flow.add_child(word_margin)
 		var letters := HBoxContainer.new()
 		letters.add_theme_constant_override("separation", 2)
