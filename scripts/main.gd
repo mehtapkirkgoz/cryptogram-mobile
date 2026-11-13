@@ -261,8 +261,9 @@ func show_game() -> void:
 			cell.add_theme_font_size_override("font_size", 18)
 			var is_selected := cell_index == game.selected
 			var is_wrong := not visible_guess.is_empty() and visible_guess != letter
-			var cell_bg := Color("fce9ed") if is_wrong else PALE if is_selected else Color("f4f6fb")
-			var cell_border := Color("c53c50") if is_wrong else BLUE if is_selected else Color("e0e6f0")
+			var is_clue := game.locked.has(cell_index)
+			var cell_bg := Color("fce9ed") if is_wrong else Color("e8f4ee") if is_clue else PALE if is_selected else Color("f4f6fb")
+			var cell_border := Color("c53c50") if is_wrong else Color("71a58b") if is_clue else BLUE if is_selected else Color("e0e6f0")
 			var style := box(cell_bg, cell_border)
 			style.set_border_width_all(2 if is_selected else 1)
 			style.set_content_margin_all(2)
