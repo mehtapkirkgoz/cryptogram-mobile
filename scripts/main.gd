@@ -321,6 +321,8 @@ func enter(letter: String) -> void:
 	show_game()
 
 func select_cell(index: int) -> void:
+	if game.locked.has(index):
+		return
 	game.selected = index
 	show_game()
 
