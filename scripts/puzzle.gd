@@ -31,15 +31,24 @@ func setup(text: String, alphabet: String, saved: Dictionary = {}, starter_hints
 	mistakes = int(saved.get("mistakes", 0))
 	for key in saved.get("locked", []):
 		locked.append(int(key))
-	if saved.is_empty() and starter_hints > 0:
+	if starter_hints > 0:
+		# Use the same starting clues for new and saved puzzles.
 		var codes: Array = answers.keys()
 		_shuffle(codes, random)
+		var starting_indices: Array = []
 		for code in codes.slice(0, mini(starter_hints, codes.size())):
 			for index in range(occurrences.size()):
 				if occurrences[index].code == code:
-					guesses[index] = answers[code]
-					locked.append(index)
+					starting_indices.append(index)
 					break
+		# Keep player guesses, but only three clues are fixed.
+		for index in locked.duplicate():
+			if not starting_indices.has(index):
+				locked.erase(index)
+		for index in starting_indices:
+			guesses[index] = occurrences[index].letter
+			if not locked.has(index):
+				locked.append(index)
 	select_next()
 
 func guess_for(index: int) -> String:
