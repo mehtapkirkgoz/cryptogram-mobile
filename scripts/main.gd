@@ -281,9 +281,14 @@ func show_game() -> void:
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
 			cell.custom_minimum_size = Vector2(32, 64)
 			cell.add_theme_font_size_override("font_size", 18)
-			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
+			var is_selected := cell_index == game.selected
+			var is_wrong := not visible_guess.is_empty() and visible_guess != letter
+			var cell_bg := Color("fce9ed") if is_wrong else PALE if is_selected else Color("f4f6fb")
+			var cell_border := Color("c53c50") if is_wrong else BLUE if is_selected else Color("e0e6f0")
+			var style := box(cell_bg, cell_border)
+			style.set_border_width_all(2 if is_selected else 1)
 			style.set_content_margin_all(2)
-			style.set_corner_radius_all(7)
+			style.set_corner_radius_all(9)
 			cell.add_theme_stylebox_override("normal", style)
 			cell.add_theme_stylebox_override("hover", style)
 			cell.add_theme_stylebox_override("pressed", style)
