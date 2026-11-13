@@ -18,7 +18,20 @@ func _expand_puzzles(code: String, subjects: Array, predicates: Array) -> void:
 	for index in range(94):
 		var sentence := "%s %s." % [subjects[index % subjects.size()], predicates[(int(index / subjects.size())) % predicates.size()]]
 		pool.append({"id": "%s_%d" % [code, index + 7], "text": sentence, "topic": "Practice %d" % (index + 1)})
+	# Keep the first six levels in place and gradually increase complexity.
+	var generated := pool.slice(6)
+	generated.sort_custom(func(a, b): return _puzzle_score(a.text) < _puzzle_score(b.text))
+	pool = pool.slice(0, 6) + generated
 	catalog[code].puzzles = pool
+
+func _puzzle_score(sentence: String) -> int:
+	var unique_letters := {}
+	var letters := 0
+	for letter in sentence:
+		if letter != " " and letter != ".":
+			unique_letters[letter] = true
+			letters += 1
+	return unique_letters.size() * 3 + letters / 4
 
 func info() -> Dictionary:
 	return catalog[current]
