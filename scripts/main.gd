@@ -208,8 +208,7 @@ func puzzle_score(index: int) -> int:
 	return unique_letters.size() * 2 + letter_count / 4
 
 func starter_hints(index: int) -> int:
-	var score := puzzle_score(index)
-	return 3
+	return 4
 
 func difficulty(index: int) -> String:
 	var labels := {
