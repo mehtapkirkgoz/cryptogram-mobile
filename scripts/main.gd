@@ -209,8 +209,12 @@ func persist() -> void:
 	Progress.save()
 
 func show_game() -> void:
+	var previous_scroll := 0
+	if screen == "game" and get_child_count() > 0 and get_child(0) is ScrollContainer:
+		previous_scroll = (get_child(0) as ScrollContainer).scroll_vertical
 	screen = "game"
 	base()
+	call_deferred("restore_game_scroll", previous_scroll)
 	header(tr_text("daily") if daily else "%s %d" % [tr_text("puzzle"), puzzle_index + 1])
 	var info := panel(body)
 	label_at(info, "%s  ·  %d%%" % [Languages.info().name, roundi(game.ratio() * 100)], 17)
@@ -352,3 +356,8 @@ func _notification(what: int) -> void:
 		Progress.save()
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		home()
+
+
+func restore_game_scroll(position: int) -> void:
+	if screen == "game" and get_child_count() > 0 and get_child(0) is ScrollContainer:
+		(get_child(0) as ScrollContainer).scroll_vertical = position
