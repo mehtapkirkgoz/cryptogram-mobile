@@ -197,29 +197,8 @@ func start(index: int, is_daily: bool = false) -> void:
 	message = tr_text("instruction")
 	show_game()
 
-func puzzle_score(index: int) -> int:
-	var sentence: String = Languages.puzzles()[index].text
-	var unique_letters := {}
-	var letter_count := 0
-	for letter in sentence:
-		if Languages.info().alphabet.contains(letter):
-			unique_letters[letter] = true
-			letter_count += 1
-	return unique_letters.size() * 2 + letter_count / 4
-
 func starter_hints(index: int) -> int:
 	return 4
-
-func difficulty(index: int) -> String:
-	var labels := {
-		"tr": ["Kolay", "Orta", "Zor"],
-		"en": ["Easy", "Medium", "Hard"],
-		"de": ["Leicht", "Mittel", "Schwer"],
-		"fr": ["Facile", "Moyen", "Difficile"],
-		"es": ["Fácil", "Medio", "Difícil"]
-	}
-	var score := puzzle_score(index)
-	return labels.get(Languages.current, labels["en"])[0 if score < 25 else 1 if score < 40 else 2]
 
 func persist() -> void:
 	Progress.state().sessions[session_key] = game.serialize()
