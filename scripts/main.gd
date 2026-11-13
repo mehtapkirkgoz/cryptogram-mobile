@@ -235,7 +235,7 @@ func show_game() -> void:
 	var board := panel(body)
 	var flow := HFlowContainer.new()
 	flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	flow.add_theme_constant_override("h_separation", 8)
+	flow.add_theme_constant_override("h_separation", 12)
 	flow.add_theme_constant_override("v_separation", 12)
 	board.add_child(flow)
 	var longest_word := 1
