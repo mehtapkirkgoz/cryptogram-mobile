@@ -192,12 +192,12 @@ func start(index: int, is_daily: bool = false) -> void:
 	var saved: Dictionary = Progress.state().sessions.get(session_key, {})
 	if not saved.has("schema") or int(saved.schema) != 6:
 		saved = {}
-	game.setup(puzzle.text, Languages.info().alphabet, saved, starter_hints(index), mistake_limit(index))
+	game.setup(puzzle.text, Languages.info().alphabet, saved, starter_hints(index))
 	message = tr_text("instruction")
 	show_game()
 
 func starter_hints(index: int) -> int:
-	return 4
+	return 2 if index < 10 else 1 if index < 35 else 0
 
 func difficulty(index: int) -> String:
 	var labels := {
@@ -207,10 +207,7 @@ func difficulty(index: int) -> String:
 		"fr": ["Facile", "Moyen", "Difficile"],
 		"es": ["Fácil", "Medio", "Difícil"]
 	}
-	return labels.get(Languages.current, labels["en"])[mini(index, 2)]
-
-func mistake_limit(index: int) -> int:
-	return 3 if daily or index > 0 else -1
+	return labels.get(Languages.current, labels["en"])[0 if index < 10 else 1 if index < 35 else 2]
 
 func persist() -> void:
 	Progress.state().sessions[session_key] = game.serialize()
@@ -269,6 +266,8 @@ func show_game() -> void:
 			var cell := Button.new()
 			var visible_guess := game.guess_for(cell_index)
 			cell.text = "%d\n%s" % [code, visible_guess if not visible_guess.is_empty() else "_"]
+			if not visible_guess.is_empty() and visible_guess != letter:
+				cell.add_theme_color_override("font_color", Color("c53c50"))
 			cell.custom_minimum_size = Vector2(29, 64)
 			cell.add_theme_font_size_override("font_size", 18)
 			var style := box(PALE if cell_index == game.selected else Color("f4f6fb"), BLUE if cell_index == game.selected else Color("e0e6f0"))
@@ -307,15 +306,7 @@ func show_game() -> void:
 				style.set_content_margin_all(1)
 				style.set_corner_radius_all(7)
 				key.add_theme_stylebox_override(state, style)
-	var mistake_text := "%s: %d" % [tr_text("mistakes"), game.mistakes]
-	if game.mistake_limit > 0:
-		mistake_text = "%s: %d / %d" % [tr_text("mistakes"), game.mistakes_left(), game.mistake_limit]
-	label_at(body, mistake_text, 15, MUTED)
-	if game.game_over():
-		label_at(body, "%s: 0 / %d" % [tr_text("mistakes"), game.mistake_limit], 18, Color("b34c5a"))
-		button_at(body, tr_text("continue"), retry_puzzle, true)
-		button_at(body, tr_text("home"), home)
-		return
+	label_at(body, "%s: %d" % [tr_text("mistakes"), game.mistakes], 15, MUTED)
 
 func retry_puzzle() -> void:
 	Progress.state().sessions.erase(session_key)
