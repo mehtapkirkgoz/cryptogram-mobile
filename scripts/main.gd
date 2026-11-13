@@ -289,7 +289,12 @@ func show_game() -> void:
 				cell.add_theme_color_override("font_color", Color("c53c50"))
 				cell.add_theme_color_override("font_hover_color", Color("c53c50"))
 				cell.add_theme_color_override("font_pressed_color", Color("c53c50"))
-			cell.pressed.connect(select_cell.bind(cell_index))
+			cell.disabled = is_clue
+			if is_clue:
+				cell.add_theme_stylebox_override("disabled", style)
+				cell.add_theme_color_override("font_disabled_color", INK)
+			else:
+				cell.pressed.connect(select_cell.bind(cell_index))
 			letters.add_child(cell)
 			occurrence_index += 1
 		word_index += 1
