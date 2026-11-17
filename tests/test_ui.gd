@@ -21,6 +21,12 @@ func run() -> void:
 			root.get_texture().get_image().save_png(OS.get_environment("TEMP").path_join("cryptogram-home.png"))
 		for index in range(Languages.puzzles().size()):
 			app.start(index)
+			assert(app.game.starting_clues.size() == mini(4, app.game.answers.size()), "Four starting clues expected: " + code)
+			var clue_letters := {}
+			for clue_index in app.game.starting_clues:
+				clue_letters[app.game.occurrences[clue_index].letter] = true
+				assert(app.game.locked.has(clue_index))
+			assert(clue_letters.size() == app.game.starting_clues.size(), "Starting clues repeat a letter: " + code)
 			await get_tree().process_frame
 			await get_tree().process_frame
 			assert(app.body.get_combined_minimum_size().x <= 440, "Puzzle overflow: " + code)
@@ -46,6 +52,7 @@ func run() -> void:
 				wrong_button.emit_signal("pressed")
 				await get_tree().process_frame
 				assert(app.game.mistakes == mistakes_before + 1, "Wrong key did not increment mistakes")
+				assert(app.game.guess_for(app.game.selected) != app.game.occurrences[app.game.selected].letter, "Wrong letter should remain visible")
 		if "--capture" in OS.get_cmdline_user_args() and code == "tr":
 			await RenderingServer.frame_post_draw
 			root.get_texture().get_image().save_png(OS.get_environment("TEMP").path_join("cryptogram-puzzle.png"))
