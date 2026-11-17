@@ -14,11 +14,11 @@ Tasarım alanı 480 × 854'tür. Pencere farklı boyutlarda ölçeklenir, küç�
 
 - Ana ekrandan dil seçin. Arayüz, klavye, bulmaca havuzu ve ilerleme birlikte değişir.
 - **Oyuna Başla** ilk tamamlanmamış normal bulmacayı veya kaldığınız kaydı açar.
-- Numaralı bir kutuya ve ardından klavyeden bir harfe dokunun. Aynı sayının tüm tekrarları birlikte açılır. Yanlış harfler kabul edilmez, hata sayacı artar; deneme sınırı yoktur.
-- **Harf Aç** seçilen sayıyı çözer; bulmaca başına üç kullanım vardır. Açılan harf silinemez.
+- Numaralı bir kutuya ve ardından klavyeden bir harfe dokunun. Aynı şifre numarasını taşıyan kutular ayrı ayrı doldurulur. Yanlış harf kutuda kırmızı gösterilir, hata sayacı artar; deneme sınırı yoktur.
+- Her yeni bulmacada **dört farklı harfin birer kutusu** önceden açık ve kilitlidir. Eski kayıtlar da bu kurala uyarlanır. **Harf Aç** seçilen kutuyu çözer; bulmaca başına üç kullanım vardır. Açılan harf silinemez.
 - **İpucu** bulmacanın konusunu gösterir; ücretsizdir. **Temizle** seçilen sayının oyuncu tarafından girilmiş harfini siler.
 - Normal seviyeler sırayla açılır. Çözülen seviyeler yeniden oynanmak yerine tamamlanmış kayıt olarak görüntülenir.
-- Günlük bulmaca cihazın yerel tarihinden seçilir ve normal seviyelerden ayrı kaydedilir. İlk sürümde üç günlük dönüşümlü yerel havuz kullanılır; çevrimiçi günlük içerik servisi yoktur.
+- Günlük bulmaca cihazın yerel tarihinden seçilir ve normal seviyelerden ayrı kaydedilir. Günlük içerik normal bulmaca havuzundan tarihe göre belirlenir; çevrimiçi günlük içerik servisi yoktur.
 - İstatistikler seçili dilin normal tamamlanan seviyelerini ve tüm modlardaki hatalarını gösterir.
 
 Her giriş, silme ve harf açma işleminde ilerleme `user://progress.json` dosyasına kaydedilir. Masaüstünde Godot editöründeki **Project > Open User Data Folder** ile bulunabilir. Dil seçimi de saklanır.
@@ -40,7 +40,7 @@ Her dilde 100 ayrı bulmaca bulunur. İlk altı cümle veri dosyalarında tutulu
 
 ## Kontroller
 
-Godot yürütülebilir dosyasını PATH'e ekledikten sonra:
+Godot yürütülebilir dosyasını PATH'e ekledikten sonra (bu komutlar çalıştırılmadan testlerin geçtiği varsayılmamalıdır):
 
 ```powershell
 godot --headless --path . --editor --quit
